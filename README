@@ -1,0 +1,11 @@
+How to install "SpotImStandaloneAds" as an SPM package (locally)
+
+1. Install non SPM dependecies. Run in terminal
+sh download_non_spm.bash
+
+2. XCode:
+add the Package "Locally"
+
+3. Xcode
+YOUR_APP_TARGET---> Build Phases ----> Link Binary with Libraries ---->
+    * add SpotImStandaloneAds
