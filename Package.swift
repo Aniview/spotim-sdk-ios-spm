@@ -3,8 +3,6 @@
 
 import PackageDescription
 
-private let adPlayerVersion = "1.9.2"
-
 let package = Package(
     name: "spotim-sdk-ios-spm",
     platforms: [.iOS(.v12)],
@@ -17,9 +15,9 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/Aniview/ad-player-sdk-ios-pods.git", from: Version(stringLiteral: adPlayerVersion)),
         .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: "10.14.0"),
-        .package(url: "https://github.com/GeoEdgeSDK/AppHarbrSDK", from: "1.10.0")
+        .package(url: "https://github.com/GeoEdgeSDK/AppHarbrSDK", from: "1.10.0"),
+        .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios", from: "3.1.0"), // AdPlayerSDK
     ],
     targets: [
         .target(
@@ -29,10 +27,9 @@ let package = Package(
                 .target(name: "KmmSpotimStandaloneAd"),
                 .target(name: "SpotImStandaloneAdsDynamic"),
                 .target(name: "OpenWrapTarget"),
-                .product(name: "AdPlayerSDK", package: "ad-player-sdk-ios-pods"),
+                .target(name: "AdPlayerSDKTarget"),
                 .product(name: "AppHarbrSDK", package: "AppHarbrSDK")
             ],
-            path: "sources",
             linkerSettings: [.unsafeFlags(["-ObjC"])]
         ),
         .target(
@@ -44,7 +41,6 @@ let package = Package(
                 .target(name: "OpenWrapHandlerDFP"),
                 .product(name: "GoogleMobileAds", package: "swift-package-manager-google-mobile-ads")
             ],
-            path: "sourcesOW",
             linkerSettings: [.unsafeFlags(["-ObjC"])]
         ),
         .binaryTarget(
@@ -74,6 +70,17 @@ let package = Package(
         .binaryTarget(
             name: "OpenWrapHandlerDFP",
             path: "downloads/OpenWrapHandlers/OpenWrapHandlerDFP.xcframework"
-        )
+        ),
+        .target(
+            name: "AdPlayerSDKTarget",
+            dependencies: [
+                .target(name: "AdPlayerSDK"),
+                .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
+            ]
+        ),
+        .binaryTarget(
+            name: "AdPlayerSDK",
+            path: "downloads/AdPlayerSDK.xcframework"
+        ),
     ]
 )
