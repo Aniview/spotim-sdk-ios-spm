@@ -1,6 +1,6 @@
 #!/bin/bash
-spotim_sdk_version='0.3.2'
-adplayer_sdk_version='1.9.3'
+spotim_sdk_version='0.3.3'
+adplayer_sdk_version='1.9.4'
 
 set -e
 cd "$(dirname "$0")"

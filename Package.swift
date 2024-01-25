@@ -16,8 +16,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: "10.14.0"),
-        .package(url: "https://github.com/GeoEdgeSDK/AppHarbrSDK", from: "1.10.0"),
-        .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios", from: "3.1.0"), // AdPlayerSDK
+        .package(url: "https://github.com/GeoEdgeSDK/AppHarbrSDK", from: "1.11.0") //,
+        // .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios", from: "3.1.0"), // AdPlayerSDK
     ],
     targets: [
         .target(
@@ -29,8 +29,7 @@ let package = Package(
                 .target(name: "OpenWrapTarget"),
                 .target(name: "AdPlayerSDKTarget"),
                 .product(name: "AppHarbrSDK", package: "AppHarbrSDK")
-            ],
-            linkerSettings: [.unsafeFlags(["-ObjC"])]
+            ]
         ),
         .target(
             name: "OpenWrapTarget",
@@ -40,8 +39,7 @@ let package = Package(
                 .target(name: "OpenWrapMeasurement"),
                 .target(name: "OpenWrapHandlerDFP"),
                 .product(name: "GoogleMobileAds", package: "swift-package-manager-google-mobile-ads")
-            ],
-            linkerSettings: [.unsafeFlags(["-ObjC"])]
+            ]
         ),
         .binaryTarget(
             name: "SpotImStandaloneAds",
@@ -74,13 +72,13 @@ let package = Package(
         .target(
             name: "AdPlayerSDKTarget",
             dependencies: [
-                .target(name: "AdPlayerSDK"),
-                .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
+                .target(name: "AdPlayerSDK") //,
+               // .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
             ]
         ),
         .binaryTarget(
             name: "AdPlayerSDK",
             path: "downloads/AdPlayerSDK.xcframework"
-        ),
+        )
     ]
 )
